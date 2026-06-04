@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="google-site-verification" content="xGJRdpbp8xtBUA2zfe9noH1F2ct-Q3NE9n_26vdOvPE" />
+    <title>بيتزا بان - طعم البيتزا الأصلي 🍕</title>
+
+    <style>
+        /* المتغيرات اللونية للوضع اللّيلي والنهاري */
+        :root {
+            --bg-color: #0f0f0f;
+            --text-color: #ffffff;
+            --navbar-bg: #111111;
+            --card-bg: #161616;
+            --border-color: #222222;
+            --primary-color: #ff1a1a;
+            --sub-text: #cccccc;
+            --review-bg: #1a1a1a;
+        }
+
+        [data-theme="light"] {
+            --bg-color: #f39b53;
+            --text-color: #111111;
+            --navbar-bg: #975926;
+            --card-bg: #020202;
+            --border-color: #dddddd;
+            --sub-text: #555;
+            --review-bg: #ffffff;
+        }
+        
+        body {
+            margin: 0;
+            padding-top: 100px;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* 👑 الـ Navbar الاحترافي الثابت في الأعلى 👑 */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 30px;
+            background: var(--navbar-bg);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 9999;
+            box-shadow: 0 4px 25px rgba(0, 0, 0, 0.3);
+            border-bottom: 2px solid var(--primary-color);
+            transition: background 0.3s;
+        }
+
+        .logo-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-img {
+            height: 55px;
+            width: auto;
+            object-fit: contain;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        /* أزرار التنقل العلوي المحدثة للتبديل */
+        .nav-links button {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            font-weight: bold;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 5px 10px;
+            transition: color 0.3s ease;
+            font-family: inherit;
+        }
+
+        .nav-links button:hover, .nav-links button.active {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
+        }
+
+        /* 🌐 أزرار التحكم باللغة والألوان 🌐 */
+        .controls-container {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .btn-control {
+            background: var(--card-bg);
+            color: var(--text-color);
+            border: 1px solid var(--border-color);
+            padding: 8px 14px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .btn-control:hover {
+            border-color: var(--primary-color);
+            background: var(--primary-color);
+            color: #fff;
+        }
+
+        /* إخفاء جميع الأقسام بشكل افتراضي لضمان التبديل السليم */
+        .page-section {
+            display: none;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto;
+            animation: fadeIn 0.5s ease-in-out;
+        }
+
+        /* إظهار القسم النشط فقط */
+        .page-section.active {
+            display: block !important;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        #home {
+            text-align: center;
+        }
+
+        .main-logo {
+            max-width: 260px;
+            height: auto;
+            margin-bottom: 15px;
+            display: inline-block;
+        }
+
+        .hotline-banner {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: var(--primary-color);
+            color: white;
+            padding: 12px 35px;
+            border-radius: 30px;
+            font-size: 1.4rem;
+            font-weight: bold;
+            text-decoration: none;
+            margin: 20px 0 40px 0;
+            box-shadow: 0 4px 15px rgba(255, 26, 26, 0.4);
+        }
+
+        .media-container {
+            width: 100%;
+            background: var(--card-bg);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+            margin-bottom: 30px;
+            border: 1px solid var(--border-color);
+        }
+
+        .menu-img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        h2 {
+            font-size: 2.2rem;
+            color: var(--primary-color);
+            border-bottom: 3px solid var(--primary-color);
+            padding-bottom: 8px;
+            margin-bottom: 35px;
+            text-align: center;
+        }
+
+        /* ⭐ قسم آراء العملاء المقسم لثلاثة أعمدة ⭐ */
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .review-card {
+            background: var(--review-bg);
+            border: 1px solid var(--border-color);
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            text-align: center;
+            transition: transform 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .review-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-color);
+        }
+
+        .reviewer-name {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+            font-size: 1.1rem;
+        }
+
+        .stars {
+            color: #ffcc00;
+            margin-bottom: 10px;
+            font-size: 1.2rem;
+        }
+
+        .review-text {
+            font-size: 0.95rem;
+            color: var(--sub-text);
+            font-style: italic;
+            text-align: justify;
+            text-justify: inter-word;
+        }
+
+        @media (max-width: 768px) {
+            body { padding-top: 160px; }
+            .navbar { flex-direction: column; gap: 10px; padding: 15px; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 5px; }
+            .controls-container { width: 100%; justify-content: center; }
+            .main-logo { max-width: 180px; }
+            h2 { font-size: 1.7rem; }
+            .reviews-grid { grid-template-columns: 1fr; gap: 15px; }
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo-container">
+            <img src="assats/الشعار.jpg" alt="شعار بيتزا بان" class="logo-img">
+        </div>
+        
+        <div class="nav-links">
+            <button onclick="showSection('home', this)" id="lnk-home" class="active">الرئيسية</button>
+            <button onclick="showSection('menu-section', this)" id="lnk-menu">المنيو والأسعار</button>
+            <button onclick="showSection('contact', this)" id="lnk-contact">اتصل بنا</button>
+        </div>
+
+        <div class="controls-container">
+            <button class="btn-control" id="btn-lang" onclick="toggleLanguage()">EN</button>
+            <button class="btn-control" id="btn-theme" onclick="toggleTheme()">🌙</button>
+        </div>
+    </nav>
+
+    <section id="home" class="page-section active" style="display: block;">
+        <img src="assats/الشعار.jpg" alt="Pizza Pan Logo" class="main-logo">
+        <br>
+        
+        <a href="tel:15616" class="hotline-banner" id="btn-hotline">📞 الخط الساخن: 15616</a>
+
+        <h2 id="reviews-title">⭐ آراء عملائنا</h2>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div>
+                    <div class="reviewer-name" id="rev-name-1">Abdo_yasser</div>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="review-text" id="rev-text-1">"بصراحه المكان ممتاز و جوده الاكل ممتازه والخدمه ممتازه وصاحب المكان محترم"</div>
+            </div>
+            <div class="review-card">
+                <div>
+                    <div class="reviewer-name" id="rev-name-2">Zeyad salama</div>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="review-text" id="rev-text-2">"بيتزا بان، المكان المثالي لعشاق البيتزا! تجربة لا تُنسى مع نكهة العجين الطازج، المكونات الشهية، وخدمة العملاء الممتازة. إذا كنت تبحث عن أفضل بيتزا في كفر الشيخ، فلا تفوت زيارة هذا الفرع الرائع."</div>
+            </div>
+            <div class="review-card">
+                <div>
+                    <div class="reviewer-name" id="rev-name-3">Abdalla Nasr</div>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                </div>
+                <div class="review-text" id="rev-text-3">"تقريبا المطعم الوحيد في كفر الشيخ اللي بيعمل حساب للطلاب وحاطط اسعار مخصوصة ليهم. وبالنسبة لأسعار المنتجات فهي ممتازة جدا مقارنة بباقي المطاعم اللي اسعارها عالية جدا على الفاضي"</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu-section" class="page-section">
+        <h2 id="menu-title">📋 صور المنيو </h2>
+        
+        <div class="media-container">
+            <img src="assats/مينيو2.jpg" alt="منيو صفحة 1" class="menu-img">
+        </div>
+
+        <div class="media-container">
+            <img src="assats/مينيو1.jpg" alt="منيو صفحة 2" class="menu-img">
+        </div>
+    </section>
+
+    <section id="contact" class="page-section">
+        <h2 id="contact-title">📞 تواصل معنا</h2>
+        <div style="font-size: 1.2rem; text-align: center; margin-bottom: 30px;">
+            <p id="txt-branch"><strong>📍 فرع المطعم الرئيسي:</strong> كفر الشيخ، مصر</p>
+        </div>
+
+        <h3 id="map-title" style="color: var(--primary-color); text-align: center; margin-bottom: 15px;">📍 موقعنا على الخريطة</h3>
+        <div class="media-container" style="height: 380px;">
+            <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3417.8443916723485!2d30.9312345!3d31.114321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMzHCsDA2JzUxLjUiTiAzMMKwNTUnNTIuNCJF!5e0!3m2!1sar!2seg!4v1700000000000" style="width: 100%; height: 100%; border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+    </section>
+
+    <script>
+        // 1. ميزة التنقل الفردي المضمونة والآمنة
+        function showSection(sectionId, buttonElement) {
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(sec => {
+                sec.style.display = 'none';
+                sec.classList.remove('active');
+            });
+
+            const targetSection = document.getElementById(sectionId);
+            if(targetSection) {
+                targetSection.style.display = 'block';
+                targetSection.classList.add('active');
+            }
+
+            const buttons = document.querySelectorAll('.nav-links button');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            if(buttonElement) {
+                buttonElement.classList.add('active');
+            }
+        }
+
+        // 2. تبديل الألوان (🌙 / ☀️)
+        function toggleTheme() {
+            const body = document.body;
+            const themeBtn = document.getElementById('btn-theme');
+            
+            if (body.getAttribute('data-theme') === 'light') {
+                body.removeAttribute('data-theme');
+                themeBtn.innerText = '🌙';
+            } else {
+                body.setAttribute('data-theme', 'light');
+                themeBtn.innerText = '☀️';
+            }
+        }
+
+        // 3. تحويل لغة الموقع (AR / EN)
+        let currentLang = 'ar';
+        function toggleLanguage() {
+            const html = document.documentElement;
+            const langBtn = document.getElementById('btn-lang');
+            
+            if (currentLang === 'ar') {
+                html.setAttribute('lang', 'en');
+                html.setAttribute('dir', 'ltr');
+                langBtn.innerText = 'AR';
+                currentLang = 'en';
+                
+                document.getElementById('lnk-home').innerText = 'Home';
+                document.getElementById('lnk-menu').innerText = 'Menu';
+                document.getElementById('lnk-contact').innerText = 'Contact Us';
+                document.getElementById('btn-hotline').innerText = '📞 Hotline: 15616';
+                document.getElementById('menu-title').innerText = '📋 Menu Sheets & Prices';
+                document.getElementById('reviews-title').innerText = '⭐ Real Customer Reviews';
+                document.getElementById('contact-title').innerText = '📞 Contact Us';
+                document.getElementById('txt-branch').innerHTML = '<strong>📍 Main Branch:</strong> Kafr El-Sheikh, Egypt';
+                document.getElementById('map-title').innerText = '📍 Our Location on Map';
+                
+                document.getElementById('rev-name-1').innerText = 'Abdo_yasser';
+                document.getElementById('rev-text-1').innerText = '"Honestly, the place is excellent, the food quality is excellent, the service is excellent, and the owner is very respectful."';
+                document.getElementById('rev-name-2').innerText = 'Zeyad salama';
+                document.getElementById('rev-text-2').innerText = '"Pizza Pan, the ideal place for pizza lovers! An unforgettable experience with fresh dough flavor, delicious ingredients, and excellent customer service. If you are looking for the best pizza in Kafr El-Sheikh, do not miss visiting this wonderful branch."';
+                document.getElementById('rev-name-3').innerText = 'Abdalla Nasr';
+                document.getElementById('rev-text-3').innerText = '"Almost the only restaurant in Kafr El-Sheikh that cares about students and sets special prices for them. As for product prices, they are very excellent compared to other restaurants whose prices are very high for nothing."';
+            } else {
+                html.setAttribute('lang', 'ar');
+                html.setAttribute('dir', 'rtl');
+                langBtn.innerText = 'EN';
+                currentLang = 'ar';
+                
+                document.getElementById('lnk-home').innerText = 'الرئيسية';
+                document.getElementById('lnk-menu').innerText = 'المنيو والأسعار';
+                document.getElementById('lnk-contact').innerText = 'اتصل بنا';
+                document.getElementById('btn-hotline').innerText = '📞 الخط الساخن: 15616';
+                document.getElementById('menu-title').innerText = '📋 صور المنيو';
+                document.getElementById('reviews-title').innerText = '⭐ آراء عملائنا';
+                document.getElementById('contact-title').innerText = '📞 تواصل معنا';
+                document.getElementById('txt-branch').innerHTML = '<strong>📍 فرع المطعم الرئيسي:</strong> كفر الشيخ، مصر';
+                document.getElementById('map-title').innerText = '📍 موقعنا على الخريطة';
+                
+                document.getElementById('rev-name-1').innerText = 'Abdo_yasser';
+                document.getElementById('rev-text-1').innerText = '"بصراحه المكان ممتاز و جوده الاكل ممتازه والخدمه ممتازه وصاحب المكان محترم"';
+                document.getElementById('rev-name-2').innerText = 'Zeyad salama';
+                document.getElementById('rev-text-2').innerText = '"بيتزا بان، المكان المثالي لعشاق البيتزا! تجربة لا تُنسى مع نكهة العجين الطازج، المكونات الشهية، وخدمة العملاء الممتازة. إذا كنت تبحث عن أفضل بيتزا في كفر الشيخ، فلا تفوت زيارة هذا الفرع الرائع."';
+                document.getElementById('rev-name-3').innerText = 'Abdalla Nasr';
+                document.getElementById('rev-text-3').innerText = '"تقريبا المطعم الوحيد في كفر الشيخ اللي بيعمل حساب للطلاب وحاطط اسعار مخصوصة ليهم. وبالنسبة لأسعار المنتجات فهي ممتازة جدا مقارنة بباقي المطاعم اللي اسعارها عالية جدا على الفاضي"';
+            }
+        }
+    </script>
+
+</body>
+</html>
